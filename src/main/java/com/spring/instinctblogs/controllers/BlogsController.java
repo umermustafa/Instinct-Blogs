@@ -133,6 +133,8 @@ public class BlogsController {
 			return "login";
 		}
 		Blog blog=blogRepository.showBlogById(id);
+		String a=blog.getBody().replaceAll("<br/>","\n");
+		blog.setBody(a);
 		model.addAttribute("blog", blog);
 		return "editblog";
 	}
@@ -149,8 +151,20 @@ public class BlogsController {
 		if (result.hasErrors()) {
 			return "editblog";
 		}
-		blogRepository.updateBlog(blog.getId(), blog.getTitle(), blog.getBody());
 		
+		
+		String a=blog.getBody().replaceAll("\n","<br/>");
+		blog.setBody(a);
+		try {
+			blogRepository.updateBlog(blog.getId(), blog.getTitle(), blog.getBody());
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("unique","This title already exists choose another one");
+			//return "redirect:/editBlog/{id}";
+			return "editblog";
+		}
 		return "redirect:/showBlogs";
 		
 	}
