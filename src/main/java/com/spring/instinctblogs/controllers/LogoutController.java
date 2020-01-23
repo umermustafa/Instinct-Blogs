@@ -13,16 +13,9 @@ import org.springframework.web.bind.support.SessionStatus;
 public class LogoutController {
 
 	@GetMapping("/logout")
-	public String logout(HttpSession session,SessionStatus sessionStatus,HttpServletResponse response,HttpServletRequest request) {
+	public String logout(HttpSession session) {
 		System.out.println("In logout controller");
 		session.invalidate();
-		 Cookie[] cookies = request.getCookies();
-	        for (Cookie cookie : cookies) {
-	            cookie.setMaxAge(0);
-	            cookie.setValue(null);
-	            cookie.setPath("/");
-	            response.addCookie(cookie);
-	        }
 		return "login";
 	}
 }
