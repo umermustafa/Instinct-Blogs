@@ -21,7 +21,7 @@ public class DefaultModelAttributeController {
 	}
 	
 	@ModelAttribute("blog")
-	public Blog getDefaultPost() {
+	public Blog getDefaultBlog() {
 		return new Blog();
 	}
 	
