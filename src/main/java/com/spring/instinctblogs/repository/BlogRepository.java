@@ -21,6 +21,11 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	 * + "where p.user_id= :id" ) public List<Blog> showPosts(@Param("id")int
 	 * userid);
 	 */
+	/*
+	 * @Query("select b from Blog b where b.id= :id") public Blog
+	 * searchBlog(@Param("id")int id);
+	 */
+	
 	@Query("SELECT b FROM Blog b WHERE b.user.id= :id")
 	public List<Blog> showBlogsByUserId(@Param("id")int userid);
 	
