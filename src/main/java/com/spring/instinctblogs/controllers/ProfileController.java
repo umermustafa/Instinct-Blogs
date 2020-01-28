@@ -33,10 +33,9 @@ public class ProfileController {
 	@PostMapping("/userprofile")
 	public String postProfile(/*@SessionAttribute("login")Login login*/Model model,HttpServletRequest request) {
 		System.out.println("In profile controller");
-		HttpSession session=(HttpSession) request.getSession();
+		HttpSession session=request.getSession();
 		Login login=(Login)session.getAttribute("login");
 		if (login==null) {
-			//throw new ApplicationException("No longer logged in");
 			return "login";
 		}
 		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
@@ -68,19 +67,5 @@ public class ProfileController {
 		return "profile";
 	}
 	
-	@GetMapping("/createBlog")
-	public String createBlog(HttpServletRequest request) {
-		System.out.println("In profile controller");
-		HttpSession session=request.getSession();
-		Login login=(Login)session.getAttribute("login");
-		if (login==null) {
-			return "login";
-		}
-		/*
-		 * User user=userRepository.searchUser(login.getUsername(),
-		 * login.getPassword()); if(user==null) { //throw new
-		 * ApplicationException("User is not logged in currently"); return "login"; }
-		 */
-		return "create";
-	}
+	
 }

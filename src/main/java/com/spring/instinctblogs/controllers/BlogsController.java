@@ -16,16 +16,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.spring.instinctblogs.models.Blog;
+import com.spring.instinctblogs.models.Comment;
 import com.spring.instinctblogs.models.Login;
 import com.spring.instinctblogs.models.User;
 import com.spring.instinctblogs.repository.BlogRepository;
+import com.spring.instinctblogs.repository.CommentRespository;
 import com.spring.instinctblogs.repository.UserRespository;
 
 @Controller
+@SessionAttributes("blog")
 public class BlogsController {
 
+	@Autowired
+	CommentRespository commentRepository;
 	
 	@Autowired
 	BlogRepository blogRepository;
@@ -33,12 +39,34 @@ public class BlogsController {
 	@Autowired
 	UserRespository userRepository;
 
-
+	//Request to create a blog
+	
+	@GetMapping("/createBlog")
+	public String createBlog(HttpServletRequest request) {
+		System.out.println("In profile controller");
+		HttpSession session=request.getSession();
+		Login login=(Login)session.getAttribute("login");
+		if (login==null) {
+			return "login";
+		}
+		/*
+		 * User user=userRepository.searchUser(login.getUsername(),
+		 * login.getPassword()); if(user==null) { //throw new
+		 * ApplicationException("User is not logged in currently"); return "login"; }
+		 */
+		return "create";
+	}
+	
 	//Saving a post in database
 	
 	@PostMapping("/saveBlog")
-	public String saveBlog(@Valid @ModelAttribute("blog")Blog blog,BindingResult result,@SessionAttribute("login")Login login,Model model) {
+	public String saveBlog(@Valid @ModelAttribute("blog")Blog blog,BindingResult result,HttpServletRequest request,Model model) {
 		System.out.println("In Blogs Controller");
+		HttpSession session=request.getSession();
+		Login login=(Login)session.getAttribute("login");
+		if (login==null) {
+			return "login";
+		}
 		if (result.hasErrors()) {
 			return "create";
 		}
@@ -90,7 +118,7 @@ public class BlogsController {
 	}
 	
 	
-	//Show all the blogs of currently logged in User
+	//Show the content of blog
 	
 	@GetMapping("/showBlog/{id}")
 	public String showBlogById(@PathVariable("id") int id,Model model,HttpServletRequest request) {
@@ -102,7 +130,9 @@ public class BlogsController {
 			return "login";
 		}
 		Blog blog=blogRepository.showBlogById(id);
+		List<Comment> comments=commentRepository.getCommentsFromPost(blog.getId());
 		model.addAttribute("blog", blog);
+		model.addAttribute("comments",comments);
 		return "showblog";
 	}
 	
