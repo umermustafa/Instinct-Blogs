@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page session="false" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -16,8 +16,7 @@
   		<a href="/showBlogs">My Blogs</a>
   		<a href="/logout">Logout</a>
 	</div>
-<!-- 	<img src="/css/img/home-bg.jpg" alt="Smiley face" align="top" height="700" width="700" style="padding:5px;" style="margin-left:250px">
- -->	<h1>Instinct Blogs</h1>
+ 	<h1>Instinct Blogs</h1>
  		 <span class="success">${blogCreated}</span>
  		<div>
  			<c:if test="${!empty(blogs)}">

@@ -7,6 +7,32 @@
 <title>Insert title here</title>
 <link href="css/navbar.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#file-upload-form").on("submit", function (e) {
+
+        // cancel the default behavior
+        e.preventDefault();
+
+        // use $.ajax() to upload file
+        $.ajax({
+            url: "/file-upload",
+            type: "POST",
+            data: new FormData(this),
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+    });
+});
+</script>
 </head>
 <body>
 	<div class="topnav">

@@ -26,5 +26,17 @@
  		<h1 style="color: #378258">${blog.title}</h1>
  		<h4>${blog.body}</h4>
  		</c:if>
-</body>
+ 		<c:if test="${!empty(comments)}">
+ 			<h2 style="color: #378258">Comments</h2>
+ 			<ul>
+ 				<c:forEach var="comment" items="${comments}">
+ 					<li>
+ 						${comment.content}<br/>
+ 						${comment.user.fullName() }
+ 						
+ 					</li>
+ 				</c:forEach>
+ 			</ul>
+ 		</c:if>
+ 		<input type="button"  onclick="location.href='/addComment'" value="Add Comment" >
 </html>

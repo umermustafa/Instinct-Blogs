@@ -5,8 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Instinct Blogs</title>
-<link href="css/navbar.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="/css/navbar.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
 </head>
 <body class="home">
 	 <div style="margin-top:150px;">
