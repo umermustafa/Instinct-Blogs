@@ -16,8 +16,8 @@ public class ApplicationConfig extends WebMvcConfigurationSupport{
 
 	 @Override
 	    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-	        registry.addResourceHandler("css/**", "images/**")
-	                .addResourceLocations("classpath:/static/css/", "classpath:/static/images/");
+	        registry.addResourceHandler("css/**", "img/**")
+	                .addResourceLocations("classpath:/static/css/", "classpath:/static/img/");
 	    }
 
 	    @Bean
@@ -28,6 +28,18 @@ public class ApplicationConfig extends WebMvcConfigurationSupport{
 	        viewResolver.setViewClass(JstlView.class);
 	        return viewResolver;
 	    }
-	    
+	    @Bean
+	    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+
+	        RequestMappingHandlerAdapter rmha = new RequestMappingHandlerAdapter();
+	        rmha.setCacheSeconds(0);
+	        return rmha;
+	    }
+	    @Bean
+	    public CommonsMultipartResolver multipartResolver() {
+	        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+	        resolver.setDefaultEncoding("utf-8");
+	        return resolver;
+	    }
 	   
 }

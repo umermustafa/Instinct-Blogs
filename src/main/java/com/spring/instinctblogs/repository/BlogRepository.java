@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,6 +30,9 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	
 	@Query("SELECT b FROM Blog b WHERE b.user.id= :id")
 	public List<Blog> showBlogsByUserId(@Param("id")int userid);
+	
+//	@Query("SELECT b FROM Blog b ORDER BY created_at")
+//	public List<Blog> showAllBlogs(org.springframework.data.domain.Pageable pageable);
 	
 	@Query("SELECT b FROM Blog b ORDER BY created_at")
 	public List<Blog> showAllBlogs();

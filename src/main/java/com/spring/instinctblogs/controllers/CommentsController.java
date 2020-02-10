@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -66,4 +67,20 @@ public class CommentsController {
 		int blogId=blog.getId();
 		return "redirect:/showBlog/"+blogId+"";
 	}
+	
+	@GetMapping("/deleteComment/{id}")
+	public String deleteBlogById(@PathVariable("id")int id,Model model,HttpServletRequest request) {
+		System.out.println("In Comments Controller,in Delete method");
+		HttpSession session=request.getSession();
+		Login login=(Login)session.getAttribute("login");
+		System.out.println("In blogs controller,showall blogs ,methods"); 
+		if (login==null) {
+			return "login";
+		}
+		Blog blog=(Blog)session.getAttribute("blog");
+		commentRepository.deleteById(id);
+		return "redirect:/showBlog/"+blog.getId()+"";
+	}
+	
+	
 }

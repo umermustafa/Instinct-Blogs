@@ -11,14 +11,9 @@
 <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	<div class="topnav">
-  		<a class="active" href="/userprofile">Home</a>
-  		<a href="/createBlog">Create Blog</a>
-  		<a href="/showBlogs">My Blogs</a>
-  		<a href="/logout">Logout</a>	
-	</div>
+	<%@include file="navbar.jsp" %>
 	<form:form method="post" action="/saveComment" class="createContainer" modelAttribute="comment">
-		<h1 style="color: #378258;">Add Comment</h1>
+		<h1>Add Comment</h1>
 		<br>
 		<label>Comment</label>
 		<form:textarea path="content" type="text" rows="8" placeholder="Enter Comment"/><form:errors path="content"/><br/>

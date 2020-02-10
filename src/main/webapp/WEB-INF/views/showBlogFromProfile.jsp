@@ -21,28 +21,21 @@
  		<c:if test="${!empty(blog)}">
  		<h1 style="color: #378258">${blog.title}</h1>
  		<p>${blog.body}</p>
- 		<a href="/addComment">Add Comment</a>
- 		</c:if>
+ 		 		<a href="/addComment">Add Comment</a>
  		
+ 		</c:if>
  		<c:if test="${!empty(comments)}">
  			<h2 style="color: #378258">Comments</h2>
  			<ul>
  				<c:forEach var="comment" items="${comments}">
  					<li>
 <%--  						<h3 style="display:inline;">${comment.content}</h3>
- --%> 					
- 						<p class="comment" style="display:inline;">${comment.content}
- 						</p>	
- 						<span>Written By: ${comment.user.fullName()}</span>
- 						<%-- <form:form method="post" action="/deleteComment/${comment.id}" >
- 							<input type="submit" value="Delete" id="submit">
- 						</form:form> --%>
- 						<a href="/deleteComment/${comment.id}">Delete</a>
+ --%> 						
+ 					<p class="comment">${comment.content}</p>
+ 					<span>Written By: ${comment.user.fullName()}</span>
  					</li>
  				</c:forEach>
  			</ul>
  		</c:if>
-	
- 			
- 	 	</div>	
+ 	</div>	
 </html>

@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Blog {
@@ -43,7 +44,8 @@ public class Blog {
 		        orphanRemoval = true
 		    )
 		    private List<Comment> comments = new ArrayList<>();
-	
+	 
+	 @DateTimeFormat(pattern="dd/MM/yyyy")
 	 @CreationTimestamp
 	 private LocalDateTime created_at;
 	 
@@ -83,6 +85,7 @@ public class Blog {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	
 	 
 	 
 }
