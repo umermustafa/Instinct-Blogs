@@ -20,16 +20,20 @@ import com.spring.instinctblogs.models.Login;
 import com.spring.instinctblogs.models.User;
 import com.spring.instinctblogs.repository.BlogRepository;
 import com.spring.instinctblogs.repository.UserRespository;
+import com.spring.instinctblogs.services.IBlogService;
+import com.spring.instinctblogs.services.IUserService;
 
 @Controller
 public class ProfileController {
 
-	
-	@Autowired 
-	UserRespository userRepository;
+	@Autowired
+	IBlogService blogService;
 	
 	@Autowired
-	BlogRepository blogRepository;
+	IUserService userService;
+	
+//	@Autowired 
+//	UserRespository userRepository;
 	
 	List<Blog> blogs=new ArrayList<Blog>();
 	
@@ -41,12 +45,14 @@ public class ProfileController {
 		if (login==null) {
 			return "login";
 		}
-		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
+		//User user=userRepository.searchUser(login.getUsername(), login.getPassword());
+		User user=userService.searchUser(login.getUsername(),login.getPassword());
 		if (user==null) {
 			return "login";
 		}
 		System.out.println(login.getUsername());	
-		blogs=blogRepository.showAllBlogs();
+		//blogs=blogRepository.showAllBlogs();
+		blogs=blogService.showAllBlogs();
 		model.addAttribute("blogs",blogs);
 		return "redirect:/userprofile";
 	}
@@ -59,7 +65,8 @@ public class ProfileController {
 		if (login==null) {
 			return "login";
 		}
-		blogs=blogRepository.showAllBlogs();
+		//blogs=blogRepository.showAllBlogs();
+		blogs=blogService.showAllBlogs();
 		model.addAttribute("blogs",blogs);
 		return "profile";
 	}

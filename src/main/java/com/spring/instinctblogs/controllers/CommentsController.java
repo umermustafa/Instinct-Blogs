@@ -21,18 +21,30 @@ import com.spring.instinctblogs.models.User;
 import com.spring.instinctblogs.repository.BlogRepository;
 import com.spring.instinctblogs.repository.CommentRespository;
 import com.spring.instinctblogs.repository.UserRespository;
+import com.spring.instinctblogs.services.IBlogService;
+import com.spring.instinctblogs.services.ICommentService;
+import com.spring.instinctblogs.services.IUserService;
 
 @Controller
 public class CommentsController {
 
-	@Autowired
-	CommentRespository commentRepository;
+//	@Autowired
+//	CommentRespository commentRepository;
 	
 	@Autowired
-	UserRespository userRepository;
+	IUserService userService;
 	
-	@Autowired 
-	BlogRepository blogRespository;
+	@Autowired
+	IBlogService blogService;
+	
+	@Autowired
+	ICommentService commentService;
+	
+//	@Autowired
+//	UserRespository userRepository;
+	
+//	@Autowired 
+//	BlogRepository blogRespository;
 	
 	@GetMapping("/addComment")
 	public String addComment(HttpServletRequest request) {
@@ -56,14 +68,16 @@ public class CommentsController {
 		if (result.hasErrors()) {
 			return "createComment";
 		}
-		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
+//		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
+		User user=userService.searchUser(login.getUsername(), login.getPassword());
 		if (user==null) {
 			return "login";
 		}
 		System.out.println(blog.getId());
 		comment.setUser(user);
 		comment.setBlog(blog);
-		commentRepository.save(comment);
+		//commentRepository.save(comment);
+		commentService.createComment(comment);
 		int blogId=blog.getId();
 		return "redirect:/showBlog/"+blogId+"";
 	}
@@ -78,7 +92,8 @@ public class CommentsController {
 			return "login";
 		}
 		Blog blog=(Blog)session.getAttribute("blog");
-		commentRepository.deleteById(id);
+//		commentRepository.deleteById(id);
+		commentService.deleteComment(id);
 		return "redirect:/showBlog/"+blog.getId()+"";
 	}
 	

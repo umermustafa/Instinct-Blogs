@@ -9,12 +9,12 @@
 <link href="/css/style.css" rel="stylesheet">
 </head>
 <body class="home">
-	 <div style="margin-top:150px;">
+	 <div style="margin-top:50px;margin-left:1030px">
     	<h1 style="color: #378258;">Instinct Blogs</h1>
 	</div>
 	 
-     <section>
-     	<div class="container">
+     
+     <div class="container">
      <form:form method="post" action="/successfull_login"   modelAttribute="newuser">
      <span class="success">${noUser}</span>
 		<span class="success">${dataSaved}</span>
@@ -26,7 +26,7 @@
 	</form:form>
 	<a href="/signUp" class="button">Register new user? Click here</a>
 	</div>
-     </section>
+    
 	
 
 </body>

@@ -128,16 +128,12 @@ body.home {
  background-repeat: no-repeat;
   background-size: auto; 
 }
-body.about {
-	justify-content: center;
- background-image: url("/css/img/about-bg.jpg");
- background-repeat: no-repeat;
-}
+
 .container {
   position: absolute;
-  left: 0;
+  right: 50px;
   margin-left:10px;
-  margin-top:20px;
+  margin-top:0px;
   margin-bottom: 100px;
   max-width: 300px;
   padding: 16px;
@@ -145,6 +141,7 @@ body.about {
   background-color: white;
   opacity:1;
 }
+
 .createContainer {
   margin-left:10px;
   margin-rigth:10px;

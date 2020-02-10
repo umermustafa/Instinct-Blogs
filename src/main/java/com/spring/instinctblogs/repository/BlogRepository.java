@@ -31,8 +31,7 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	@Query("SELECT b FROM Blog b WHERE b.user.id= :id")
 	public List<Blog> showBlogsByUserId(@Param("id")int userid);
 	
-//	@Query("SELECT b FROM Blog b ORDER BY created_at")
-//	public List<Blog> showAllBlogs(org.springframework.data.domain.Pageable pageable);
+
 	
 	@Query("SELECT b FROM Blog b ORDER BY created_at")
 	public List<Blog> showAllBlogs();

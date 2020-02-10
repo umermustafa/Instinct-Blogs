@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.spring.instinctblogs.models.User;
 import com.spring.instinctblogs.repository.UserRespository;
+import com.spring.instinctblogs.services.IUserService;
 
 @Controller
 public class RegisterationController {
 
+//	@Autowired
+//	UserRespository userRepository;
+
 	@Autowired
-	UserRespository userRepository;
-	
+	IUserService userService; 	
 	@GetMapping("/signUp")
 	public String welcome() {
 		System.out.println("In home controller");
@@ -32,7 +35,7 @@ public class RegisterationController {
 			return "signup";
 		}
 		 try {
-			 userRepository.save(user);
+			 userService.registerUser(user);
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("unique","Username already exist,try another one.");
