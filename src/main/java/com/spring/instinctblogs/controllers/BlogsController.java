@@ -43,15 +43,6 @@ public class BlogsController {
 	
 	@Autowired
 	ICommentService commentService;
-	
-//	@Autowired
-//	CommentRespository commentRepository;
-
-//	@Autowired
-//	BlogRepository blogRepository;
-
-//	@Autowired
-//	UserRespository userRepository;
 
 	//Request to create a blog
 	
@@ -92,7 +83,6 @@ public class BlogsController {
 			return "create";
 		}
 		System.out.println(login.getUsername());
-//		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
 		User user=userService.searchUser(login.getUsername(), login.getPassword());
 
 		if (user==null) {
@@ -126,21 +116,19 @@ public class BlogsController {
 	// Show all the blogs of the currently logged in user
 
 	@GetMapping("/showBlogs")
-	public String showBlogs(/* @SessionAttribute("login")Login login, */HttpServletRequest request,Model model){
+	public String showBlogs(HttpServletRequest request,Model model){
 		HttpSession session=request.getSession();
 		Login login=(Login)session.getAttribute("login");
 		System.out.println("In blogs controller,showall blogs ,methods"); 
 		if (login==null) {
 			return "login";
 		}
-//		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
 		User user=userService.searchUser(login.getUsername(), login.getPassword());
 
 		if(user==null) {
 			return "login";
 		}
 		List<Blog> blogs=new ArrayList<Blog>();
-		//blogs=blogRepository.showBlogsByUserId(user.getId());
 		blogs=blogService.showBlogsByUserId(user.getId());
 		model.addAttribute("blogs",blogs);
 		return "myblogs";
@@ -158,13 +146,10 @@ public class BlogsController {
 		if (login==null) {
 			return "login";
 		}
-//		User user=userRepository.searchUser(login.getUsername(), login.getPassword());
 		User user=userService.searchUser(login.getUsername(), login.getPassword());
 
 
-		//Blog blog=blogRepository.showBlogById(id);
 		Blog blog=blogService.showBLogById(id);
-//		List<Comment> comments=commentRepository.getCommentsFromPost(blog.getId());
 		List<Comment> comments=commentService.getCommentsFromPost(blog.getId());
 
 		if (user.getId()==blog.getUser().getId()) {
@@ -190,7 +175,6 @@ public class BlogsController {
 		}
 //		Blog blog=blogRepository.showBlogById(id);
 		Blog blog=blogService.showBLogById(id);
-//		List<Comment> comments=commentRepository.getCommentsFromPost(blog.getId());
 		List<Comment> comments=commentService.getCommentsFromPost(blog.getId());
 
 		model.addAttribute("blog", blog);
@@ -225,7 +209,6 @@ public class BlogsController {
 		if (login==null) {
 			return "login";
 		}
-//		Blog blog=blogRepository.showBlogById(id);
 		Blog blog=blogService.showBLogById(id);
 		String a=blog.getBody().replaceAll("<br/>","\n");
 		blog.setBody(a);
@@ -250,7 +233,6 @@ public class BlogsController {
 		String a=blog.getBody().replaceAll("\n","<br/>");
 		blog.setBody(a);
 		try {
-			//blogRepository.updateBlog(blog.getId(), blog.getTitle(), blog.getBody());
 			blogService.updateBlog(blog.getId(),blog.getTitle(), blog.getBody());
 		}
 		catch (Exception e) {
