@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.spring.instinctblogs.models.User;
-import com.spring.instinctblogs.repository.UserRespository;
 import com.spring.instinctblogs.services.IUserService;
 
 @Controller
 public class RegisterationController {
-
-//	@Autowired
-//	UserRespository userRepository;
 
 	@Autowired
 	IUserService userService; 	

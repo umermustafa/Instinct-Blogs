@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.spring.instinctblogs.models.Login;
 import com.spring.instinctblogs.models.User;
-import com.spring.instinctblogs.repository.UserRespository;
 import com.spring.instinctblogs.services.IUserService;
 
 @Controller
@@ -19,9 +18,7 @@ public class LoginController {
 
 	@Autowired
 	IUserService userService;
-//	@Autowired
-//	UserRespository userRespository;
-//	
+
 	@GetMapping("/goToLogin")
 	public String goToLogin() {
 		return "login";
@@ -29,7 +26,6 @@ public class LoginController {
 	
 	@PostMapping("/successfull_login")
 	public String login(@ModelAttribute("login") Login login,Model model)  {
-//		User user=userRespository.searchUser(login.getUsername(),login.getPassword());
 		User user=userService.searchUser(login.getUsername(), login.getPassword());
 
 		if (user==null) {
