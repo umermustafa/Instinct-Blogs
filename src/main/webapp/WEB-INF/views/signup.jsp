@@ -22,10 +22,10 @@
     
     <p>Please fill in this form to create an account.</p>
     <hr>
-   				<form:input path="username" type="text" placeholder="Enter Username"/><form:errors path="username" cssClass="error"/><br/>
-    			<form:input path="password" type="password"  placeholder="Enter password"/><form:errors path="password" cssClass="error"/><br/>
-    			<form:input path="firstName" type="text"  placeholder="Enter First Name"/><form:errors path="firstName" cssClass="error"/><br/>
-    			<form:input path="lastName" type="text"  placeholder="Enter Last Name"/><form:errors path="lastName" cssClass="error"/><br/>
+   				<form:input path="username" type="text" placeholder="Enter Username"/><form:errors path="username"/><br/>
+    			<form:input path="password" type="password"  placeholder="Enter password"/><form:errors path="password"/><br/>
+    			<form:input path="firstName" type="text"  placeholder="Enter First Name"/><form:errors path="firstName"/><br/>
+    			<form:input path="lastName" type="text"  placeholder="Enter Last Name"/><form:errors path="lastName"/><br/>
     			<input type="submit" value="Sign Up" id="submit" >
 	</form:form>
 	<a href="/" class="button">Already Registered? Click here</a>

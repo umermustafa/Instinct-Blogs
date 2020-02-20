@@ -15,13 +15,13 @@
 	 
      
      <div class="container">
-     <form:form method="post" action="/successfull_login"   modelAttribute="newuser">
+     <form:form method="post" action="/successfull_login"   modelAttribute="login">
      <span class="success">${noUser}</span>
 		<span class="success">${dataSaved}</span>
     <h1 style="color: #378258;">Login</h1>
     <hr>
-   				<form:input path="username" type="text" placeholder="Enter Username"/><form:errors path="username" cssClass="error"/><br/>
-    			<form:input path="password" type="password"  placeholder="Enter password"/><form:errors path="password" cssClass="error"/><br/>
+   				<form:input path="username" type="text" placeholder="Enter Username"/><form:errors path="username"/><br/>
+    			<form:input path="password" type="password"  placeholder="Enter password"/><form:errors path="password"/><br/>
     			<input type="submit" value="Login" id="submit" >
 	</form:form>
 	<a href="/signUp" class="button">Register new user? Click here</a>
